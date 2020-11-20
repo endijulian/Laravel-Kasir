@@ -9,7 +9,7 @@
                     <h3 class="card-title">Edit User</h3>
                 </div>
 
-                <form action="{{ route('user.update', $edit) }}" method="POST">
+                <form action="{{ route('user.update', $edit) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -33,6 +33,17 @@
                             @if ($errors->has('email'))
                                 <span class="help-block">
                                     {{$errors->first('email')}}
+                                </span>
+                            @endif
+                        </div>
+
+                        <div class="form-group {{$errors->has('gambar') ? 'invalid' : ''}}">
+                            <label>Gambar</label>
+                            <input class="form-control" type="file" name="gambar" value="{{$edit->gambar}}">
+    
+                            @if ($errors->has('gambar'))
+                                <span class="text-red">
+                                    {{$errors->first('gambar')}}
                                 </span>
                             @endif
                         </div>

@@ -21,6 +21,7 @@
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>email</th>
+                                <th>Gambar</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -38,6 +39,7 @@
                                 <td>{{$no}}</td>
                                 <td>{{ $us->name }}</td>
                                 <td>{{ $us->email }}</td>
+                                <td class="text-center"><img src="{{asset('/uploads/'.$us->gambar)}}" class="img-thumbnail" width="200" height="200"></td>
                                 <td>
                                     <a href="{{ route('user.edit', $us) }}" class="btn btn-warning btn-sm">
                                         <i class="fas fa-edit"></i>

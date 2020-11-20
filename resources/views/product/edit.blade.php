@@ -6,6 +6,16 @@
 
 @section('content')
 
+@if($errors->any())
+
+    <ul class="alert alert-danger">
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+
+@endif
+
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -19,7 +29,7 @@
 
                     <div class="card-body">
                         <div class="form-group {{$errors->has('name') ? 'invalid' : ''}}">
-                            <label>Harga Produk</label>
+                            <label>Nama Produk</label>
                             <input class="form-control" type="text" name="name" value="{{$product->name}}" placeholder="Masukan harga produk">
 
                             @if ($errors->has('name'))
@@ -39,6 +49,18 @@
                                 </span>
                             @endif
                         </div>
+
+                        <div class="form-group {{$errors->has('gambar') ? 'invalid' : ''}}">
+                            <label>Gambar Produk</label>
+                            <input class="form-control" type="file" name="gambar" value="{{$product->gambar}}">
+    
+                            @if ($errors->has('gambar'))
+                                <span class="text-red">
+                                    {{$errors->first('gambar')}}
+                                </span>
+                            @endif
+                        </div>
+
                     </div>
 
                     <div class="card-footer">

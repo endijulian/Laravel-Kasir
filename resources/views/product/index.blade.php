@@ -27,6 +27,7 @@
                             <tr>
                                 <th width="5%">No</th>
                                 <th>Nama Produk</th>
+                                <th>Gambar Produk</th>
                                 <th>Harga</th>
                                 <th>Action</th>
                             </tr>
@@ -43,6 +44,7 @@
                             <tr>
                                 <td>{{$no}}</td>
                                 <td>{{$product->name}}</td>
+                                <td class="text-center"><img src="{{asset('/uploads/gambarProduk/'.$product->gambar)}}" alt="" width="200px" height="200px"></td>
                                 <td>{{number_format($product->price)}}</td>
                                 <td>
                                     <a href="{{route('product.edit', [$category, $product])}}" class="btn btn-warning btn-sm">

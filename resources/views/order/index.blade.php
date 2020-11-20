@@ -59,6 +59,74 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-12">
+            <div class="invoice p-3 mb-3">
+
+                <div class="card-header">
+                    <h3 class="card-title"><b> Data Penjualan Menu Makanan Dan Minuman </b></h3>
+                </div>
+                <div class="row">
+                    <div class="col-12 table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Tanggal</th>
+                                    <th>Menu</th>
+                                    <th>Qty</th>
+                                    <th>Harga</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php
+                                    $nmor=0;
+                                    $total=0;
+                                @endphp
+                                @foreach ($menu as $item)
+
+                                    @php
+                                        $nmor++;
+                                        $total = $item->product_price * $item->qty;
+                                    @endphp
+                                <tr>
+                                    <td>{{ $nmor }}</td>
+                                    <td>{{Date::parse($item->created_at)->format('j F Y')}}</td>
+                                    <td>{{ $item->product_name }}</td>
+                                    <td>{{ $item->qty }}</td>
+                                    <td>{{ number_format($item->product_price) }}</td>
+                                    <td>{{ number_format($item->subtotal) }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                    </div>
+                    <div class="col-6">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <th>Total Keseluruhan</th>
+                                    <td><b>{{ number_format($tt) }}</b></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
 @endsection
 
 @push('styles')

@@ -9,7 +9,7 @@
     <div class="row-mb-4">
         <div class="col-sm-12">
             <div class="float-right">
-                <input type="button" class="btn btn-default" id="print" onclick="printreceipt()" value="Cetak Nota">
+                <input type="button" class="btn btn-primary" id="print" onclick="printreceipt()" value="Cetak Nota">
             </div>
         </div>
     </div>

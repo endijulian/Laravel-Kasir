@@ -1,15 +1,12 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{url('/')}}" class="brand-link">
-        <span class="brand-text font-weight-light">App Kasir</span>
-    </a>
-
-
+    
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="info">
-            <a href="#" class="d-block">{{Auth::user()->name}}</a>
-        </div>
+                <img src="{{asset('/uploads/'. Auth::user()->gambar)}}" class="img-circle" width="100" height="100">
+                <a href="#" class="d-block"><h3>{{Auth::user()->name}}</h3></a>
+    </div>
 
     <!-- Sidebar Menu -->
         <nav class="mt-2">

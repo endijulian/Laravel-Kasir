@@ -61,4 +61,6 @@ Route::group(['middleware' => 'role:owner', 'auth'], function () {
     //menampilkan report penjualan
     Route::get('report', 'ReportController@index')->name('report.index');
     Route::get('report/changeperiode', 'ReportController@changePeriode')->name('report.changePeriode');
+    Route::get('print', 'ReportController@print')->name('report.print');
+    Route::get('printPeriode', 'ReportController@printPeriode')->name('report.printPeriode');
 });

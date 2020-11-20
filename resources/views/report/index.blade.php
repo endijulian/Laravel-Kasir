@@ -15,6 +15,7 @@
 
                 <div class="float-left mt-2 ml-2">
                     <a href="{{ route('report.changePeriode') }}" class="btn btn-success">Ubah Periode</a>
+                    <a href="{{route('report.print')}}" class="btn btn-primary">Cetak Laporan</a>
                 </div>
 
                 <div class="card-body">
@@ -42,7 +43,7 @@
                             @endphp
                             <tr>
                                 <td>{{ $no }}</td>
-                                <td>{{ Date::parse($date)->format('j F Y') }}</td>
+                                <td>{{ Date::parse($date)->format('l d F Y') }}</td>
                                 <td>{{ number_format($income->income($date)) }}</td>
                             </tr>
                             @endwhile

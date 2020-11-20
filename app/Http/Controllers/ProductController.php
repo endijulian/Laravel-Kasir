@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Storage;
+use File;
 
 class ProductController extends Controller
 {
@@ -34,20 +35,26 @@ class ProductController extends Controller
             $request,
             [
                 'name' => 'required',
-                'price' => 'required'
+                'price' => 'required',
+                'gambar' => 'required|image|mimes:jpg,png,jpeg'
             ],
             [
                 'name.required' => 'Nama produk harus di isi !!',
-                'price.required' => 'Harga produk harus di isi !!'
+                'price.required' => 'Harga produk harus di isi !!',
+                'gambar.required' => 'Gambar harus di isi !!'
             ]
         );
 
+        $gambarProduk = time().$request->gambar->getClientOriginalName();
+        $request->gambar->move('uploads/gambarProduk', $gambarProduk);
+
+
         Product::create([
-            'category_id' => $request->id,
+            'category_id' => $category->id,
             'name' => $request->name,
             'slug' => Str::slug($request->name),
-            'price' => $request->price
-
+            'price' => $request->price,
+            'gambar' => $gambarProduk,
         ]);
 
         Alert::success('Data produk berhasil ditambahkan');
@@ -65,17 +72,23 @@ class ProductController extends Controller
             $request,
             [
                 'name' => 'required',
-                'price' => 'required'
+                'price' => 'required',
+                'gambar' => 'sometimes|image|mimes:png,jpeg,jpg'
             ],
             [
                 'name.required' => 'Nama produk harus di isi !',
-                'price.required' => 'Harga produk harus di isi !'
+                'price.required' => 'Harga produk harus di isi !',
+                'gambar.required' => 'Harga produk harus di isi !'
             ]
         );
 
+        $gambarProduk = time().$request->gambar->getClientOriginalName();
+        $request->gambar->move('uploads/gambarProduk', $gambarProduk);
+
         $product->update([
             'name' => $request->name,
-            'price' => $request->price
+            'price' => $request->price,
+            'gambar' => $gambarProduk
         ]);
 
         Alert::success('Data produk berhasil di update');
@@ -85,6 +98,7 @@ class ProductController extends Controller
     public function destroy(Category $category, Product $product) //$id
     {
         $product->delete();
+        // dd($product);
         return redirect()->route('product.index', $category);
 
         // $category = \App\Category::findOrFail($id);

@@ -9,6 +9,7 @@ use App\Orderdetail;
 use App\Temproder;
 use App\Order;
 use Illuminate\Support\Facades\Auth;
+use DB;
 
 class OrderController extends Controller
 {
@@ -18,7 +19,10 @@ class OrderController extends Controller
         $orders = Order::orderBy('id', 'desc')->get();
         $items = new Orderdetail;
 
-        return view('order.index', compact('orders', 'items'));
+        $menu = Orderdetail::orderBy('id', 'desc')->get();
+        $tt = DB::table("orderdetails")->get()->sum("subtotal");
+
+        return view('order.index', compact('orders', 'items', 'menu','tt'));
     }
 
     public function process(Request $request)
@@ -84,6 +88,7 @@ class OrderController extends Controller
     public function receipt(Order $order)
     {
         $profile = Profile::first();
-        return view('order.receipt', compact('order', 'profile'));
+        $lastOrder = Order::latest()->first();
+        return view('order.receipt', compact('order', 'profile','lastOrder'));
     }
 }

@@ -7,18 +7,17 @@
 @section('content')
 
     <div class="row">
-        <div class="col-12">
+        <div class="col-6">
             <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">Ubah Periode</h3>
                 </div>
 
                 <form action="{{route('report.changePeriode')}}" method="GET">
-
                     <div class="card-body">
 
                         <div class="form-group">
-                            <label>PIlih Periode</label>
+                            <label>Pilih Periode</label>
 
                             <div class="input-group">
                                 <div class="input-group-append">
@@ -37,10 +36,43 @@
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">Tampilkan</button>
                     </div>
-
                 </form>
             </div>
         </div>
+
+        <div class="col-6">
+            <div class="card card-success">
+                <div class="card-header">
+                    <h3 class="card-title">Cetak Periode</h3>
+                </div>
+
+                <form action="{{route('report.printPeriode')}}" method="GET">
+                    <div class="card-body">
+
+                        <div class="form-group">
+                            <label>Pilih Periode Cetak</label>
+
+                            <div class="input-group">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        <i class="far fa-calendar-alt"></i>
+                                    </span>
+                                </div>
+
+                                <input id="datePrint" class="form-control float-right" type="text" name="datePrint">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-success">Cetak</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
     </div>
 
     @if (!empty($startDate))
@@ -51,6 +83,7 @@
                         <h3 class="card-title">
                             Laporan Pendapatan {{ Date::parse($startDate)->format('j F Y') }}
                             s/d {{ Date::parse($endDate)->format('j F Y') }}
+                            {{--  <a href="{{route('report.printPeriode')}}" class="btn btn-success">Cetak Laporan</a>  --}}
                         </h3>
                     </div>
 
@@ -110,6 +143,16 @@
         <script>
             $(function() {
                 $('#daterange').daterangepicker({
+                    locale:{
+                        format: 'YYYY-MM-DD'
+                    }
+                })
+            });
+        </script>
+
+        <script>
+            $(function() {
+                $('#datePrint').daterangepicker({
                     locale:{
                         format: 'YYYY-MM-DD'
                     }

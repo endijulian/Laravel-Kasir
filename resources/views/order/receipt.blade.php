@@ -5,7 +5,7 @@
 
     <style>
         .receipt{
-            width: 250px;
+            width: 350px;
         }
     </style>
 
@@ -16,46 +16,79 @@
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
-                    <h2>{{$profile->name}}</h2>
-                    <h5>{{$profile->address}}</h5>
-                    <h5>{{$profile->city}}</h5>
+                    <h3>{{$profile->name}}</h3>
+                    <h6>{{$profile->address}}</h6>
+                    <h6>{{$profile->city}}</h6>
                 </div>
+                <p>{{$profile->phone}}</p>
             </div>
 
             <div class="card-body">
-                <table width="100%">
-                    <tr>
-                        <td><h5>{{Date::parse($order->created_at)->format('d/m/y')}}</h5></td>
-                        <td><h5>#.{{$order->invoice}}</h5></td>
-                    </tr>
-                    <tr>
-                        <td><h5>{{Date::parse($order->created_at)->format('H:i')}}</h5></td>
-                        <td><h5>{{$order->user->name}}</h5></td>
-                    </tr>
-                </table>
-                <table width="100%">
-                    <tr>
-                        <td><h6>TOTAL</h6></td>
-                        <td class="text-right"><h5>*{{number_format($order->total)}}</h5></td>
-                    </tr>
-                    <tr>
-                        <td><h6>BAYAR</h6></td>
-                        <td class="text-right"><h6>*{{number_format($order->pay)}}</h6></td>
-                    </tr>
-                    <tr>
-                        <td><h6>KEMBALI</h6></td>
-                        <td class="text-right"><h6>*{{number_format($order->pay - $order->total)}}</h6></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="text-center"><h5>Terima Kasih Atas Kunjungan Anda</h5></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="text-center"><h5>{{$profile->phone}}</h5></td>
-                    </tr>
-                </table>
+
+
+                <div class="card-header bg-secondry color-palette">
+                    <h6 class="card-title">Bukti Transaksi</h6>
+                </div>
+
+                <div class="card-body">
+                    <table class="table table-condensed"  width="100%">
+                        <tbody>
+                            <tr>
+                                <td>No. Invoice</td>
+                                <td class="text-primary strong">{{$order->invoice}}</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Tanggal</td>
+                                <td colspan="3">{{Date::parse($order->created_at)->format('d/m/y')}}, {{Date::parse($order->created_at)->format('H:i')}}</td>
+                                
+                            </tr>
+                            <tr>
+                                <td>Nama Customer</td>
+                                <td colspan="2">{{$order->customer_name}}</td>
+                                <td></td>
+                            </tr>
+
+
+                            @foreach ($lastOrder->orderDetail as $item)
+                                <tr>
+                                    <td>{{$item->product_name}}</td>
+                                    <td>{{number_format($item->product_price)}}</td>
+                                    <td>{{$item->qty}}</td>
+                                    <td>{{number_format($item->subtotal)}}</td>
+                                </tr>
+                            @endforeach
+
+                            <tr>
+                                <td><b> Total</b></td>
+                                <td></td>
+                                <td></td>
+                                <td><b> Rp. {{number_format($order->total)}} </b></td>
+                            </tr>
+                            <tr>
+                                <td><b> Jumlah Bayar </b></td>
+                                <td></td>
+                                <td></td>
+                                <td><b> Rp. {{number_format($order->pay)}} </b></td>
+                            </tr>
+                            <tr>
+                                <td><b> Kembalian</b></td>
+                                <td></td>
+                                <td></td>
+                                <td><b> Rp. {{number_format($order->pay - $order->total)}} </b></td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="2" class="text-center"><p>Terima Kasih Atas Kunjungan Anda</p></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-
 </body>
 </html>

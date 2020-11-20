@@ -41,6 +41,17 @@
                         @endif
                     </div>
 
+                    <div class="form-group {{$errors->has('gambar') ? 'invalid' : ''}}">
+                        <label>Gambar Produk</label>
+                        <input class="form-control" type="file" name="gambar" value="{{old('gambar')}}">
+
+                        @if ($errors->has('gambar'))
+                            <span class="text-red">
+                                {{$errors->first('gambar')}}
+                            </span>
+                        @endif
+                    </div>
+
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
